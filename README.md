@@ -17,7 +17,8 @@ dan ia berjalan skrin penuh seperti aplikasi biasa.
 | `index.html` | Versi utama. Inilah yang disiarkan oleh GitHub Pages, dan yang patut disunting. |
 | `mathverse-luar-talian.html` | Satu fail tunggal dengan semua gambar dibenamkan. Untuk dihantar melalui WhatsApp/Telegram atau digunakan tanpa internet. |
 | `assets/wang-malaysia/` | Foto duit syiling dan wang kertas Malaysia (WebP). |
-| `bina-luar-talian.py` | Menjana semula `mathverse-luar-talian.html` selepas `index.html` disunting. |
+| `bina-luar-talian.py` | Menjana `versi.json` + `mathverse-luar-talian.html` selepas `index.html` disunting. |
+| `versi.json` | Nombor versi yang disemak oleh aplikasi untuk kemas kini automatik. Jangan sunting terus. |
 
 ---
 
@@ -104,13 +105,29 @@ ENJIN.namaEnjin = c => () => ({
 
 ---
 
-## Menjana semula versi luar talian
+## Selepas setiap suntingan — WAJIB
 
-Selepas menyunting `index.html`:
+1. **Naikkan nombor versi** dalam `index.html`:
 
-```bash
-python3 bina-luar-talian.py
-```
+   ```js
+   const VERSI="1.2";        // dahulunya 1.1
+   ```
+
+2. Jalankan skrip binaan:
+
+   ```bash
+   python3 bina-luar-talian.py
+   ```
+
+   Ia menyalin nombor versi ke `versi.json` dan menjana semula
+   `mathverse-luar-talian.html`.
+
+3. Muat naik ke GitHub.
+
+**Mengapa langkah 1 penting:** aplikasi yang ditambah ke Skrin Utama iPhone
+menyimpan salinan lama. Setiap kali dibuka, ia menyemak `versi.json` di
+pelayan; jika nombornya berbeza daripada `VERSI` dalam kod, ia memuat semula
+sendiri. Kalau nombor tidak dinaikkan, telefon akan terus memakai versi lama.
 
 ---
 

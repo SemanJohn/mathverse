@@ -58,8 +58,11 @@ body{
   cursor:pointer;flex:none;display:inline-flex;align-items:center;justify-content:center;
   white-space:nowrap;line-height:1;
   transition:transform .1s,background .12s,border-color .12s}
-.back:hover{background:var(--card2);border-color:var(--p4)}
+
 .back:active{transform:scale(.96)}
+.versi{flex:none;font-size:11px;font-weight:800;letter-spacing:.4px;color:var(--dim);
+  background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:8px;
+  padding:4px 8px;line-height:1;align-self:center}
 .crumb{font-size:13px;color:var(--dim);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .coin{background:linear-gradient(135deg,#ffd166,#ff9f1c);color:#2b1d00;font-weight:800;
   border-radius:999px;padding:7px 14px;font-size:14px;white-space:nowrap;box-shadow:0 3px 0 #c47f00}
@@ -77,10 +80,10 @@ body{
 .g2{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
 .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:clamp(10px,1.8vh,16px);
   cursor:pointer;transition:transform .12s,box-shadow .12s;position:relative;overflow:hidden}
-.card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.35)}
+
 .card:active{transform:scale(.98)}
 .card.flat{cursor:default}
-.card.flat:hover{transform:none;box-shadow:none}
+
 .yr{text-align:center;padding:clamp(12px,2.4vh,22px) 12px}
 .yr .n{font-size:clamp(30px,5.4vh,46px);font-weight:900;line-height:1}
 .yr .l{font-size:13px;color:var(--dim);margin-top:6px}
@@ -99,7 +102,7 @@ body{
 .row{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);
   border-radius:14px;padding:clamp(9px,1.5vh,14px) 13px;cursor:pointer;
   transition:transform .1s,background .12s,border-color .12s,box-shadow .12s}
-.row:hover{background:var(--card2);border-color:#5260ad;box-shadow:0 7px 18px rgba(0,0,0,.2)}
+
 .row:active{transform:scale(.985)}
 .row .ic{width:clamp(28px,4.6vh,36px);height:clamp(28px,4.6vh,36px);flex:none;border-radius:10px;
   display:grid;place-items:center;font-size:clamp(14px,2.6vh,17px);
@@ -151,7 +154,7 @@ h3.sub{font-size:clamp(11px,1.7vh,13px);color:var(--dim);margin:clamp(10px,2vh,2
 .opt{background:var(--card2);border:2px solid var(--line);border-radius:15px;
   min-height:48px;padding:clamp(9px,1.8vh,16px) 12px;font-size:clamp(15px,2.2vh,19px);font-weight:800;
   cursor:pointer;text-align:center;transition:transform .1s,background .12s,border-color .12s;color:var(--txt)}
-.opt:hover{border-color:var(--p4);background:#2f3c7d;transform:translateY(-1px)}
+
 .opt:active{transform:scale(.97)}
 .opt.ok{background:#06402c;border-color:var(--ok);color:#7effd0}
 .opt.no{background:#4a1024;border-color:var(--no);color:#ffb3c6}
@@ -187,7 +190,7 @@ h3.sub{font-size:clamp(11px,1.7vh,13px);color:var(--dim);margin:clamp(10px,2vh,2
 .btn{background:linear-gradient(135deg,#4cc9f0,#4361ee);color:#fff;border:0;border-radius:14px;
   min-height:48px;padding:13px 26px;font-size:16px;font-weight:900;cursor:pointer;
   box-shadow:0 4px 0 #2c3fa8;transition:filter .12s,transform .1s,box-shadow .1s}
-.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+
 .btn:active{transform:translateY(2px);box-shadow:0 2px 0 #2c3fa8}
 .btn.g{background:linear-gradient(135deg,#06d6a0,#059669);box-shadow:0 4px 0 #04724f}
 .btn.sm{padding:9px 16px;font-size:14px;box-shadow:none}
@@ -482,7 +485,8 @@ h3.sub{font-size:clamp(11px,1.7vh,13px);color:var(--dim);margin:clamp(10px,2vh,2
 .frac-shade-part{min-width:0;border:0;border-right:2px solid #9eb1ff;background:#0b1235;
   color:#9aa9d7;font-size:clamp(10px,1.5vh,13px);font-weight:900;cursor:pointer}
 .frac-shade-part:last-child{border-right:0}
-.frac-shade-part:hover,.frac-shade-part:focus-visible{background:#1d2b67;outline:3px solid #4cc9f0;outline-offset:-3px}
+
+.frac-shade-part:focus-visible{background:#1d2b67;outline:3px solid #4cc9f0;outline-offset:-3px}
 .frac-shade-part.on{color:#3b2600;background:linear-gradient(145deg,#ffe17c,#ffad2f)}
 .frac-shade-strip.gaya-jubin{width:clamp(116px,18vh,150px);height:clamp(116px,18vh,150px);
   gap:0;border:3px solid #9eb1ff;border-radius:10px;background:#9eb1ff}
@@ -546,7 +550,7 @@ h3.sub{font-size:clamp(11px,1.7vh,13px);color:var(--dim);margin:clamp(10px,2vh,2
 .grid2d{display:grid;gap:2px;margin:16px auto;justify-content:center}
 .gc{width:clamp(24px,4.4vh,34px);height:clamp(24px,4.4vh,34px);background:#0d1233;border:1px solid var(--line);border-radius:5px;
   cursor:pointer;display:grid;place-items:center;font-size:17px}
-.gc:hover{background:var(--card2)}
+
 .gc.sel{background:var(--p2)}
 .axl{font-size:11px;color:var(--dim);text-align:center}
 .bars{display:flex;gap:14px;align-items:flex-end;justify-content:center;height:min(190px,26vh);
@@ -562,7 +566,7 @@ h3.sub{font-size:clamp(11px,1.7vh,13px);color:var(--dim);margin:clamp(10px,2vh,2
 .nldot{position:absolute;top:26px;font-size:27px;transform:translateX(-50%);transition:left .5s}
 .hole{position:absolute;top:30px;width:26px;height:26px;border-radius:50%;
   background:#000;border:3px solid #5a3d1f;transform:translateX(-50%);cursor:pointer}
-.hole:hover{border-color:var(--p1)}
+
 .shape3d{font-size:clamp(44px,8vh,74px);text-align:center;margin:clamp(6px,1.4vh,14px) 0;flex:none}
 .props{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin:14px 0}
 .prop{background:#0d1233;border:1px solid var(--line);border-radius:10px;padding:9px 14px;font-size:13px}
@@ -600,13 +604,19 @@ h3.sub{font-size:clamp(11px,1.7vh,13px);color:var(--dim);margin:clamp(10px,2vh,2
   text-align:center;line-height:1.15;color:var(--p4)}
 .plbl{width:100%;text-align:center;font-size:clamp(9px,1.4vh,11px);color:var(--dim);
   font-weight:700;margin-bottom:3px}
-.pdw{display:grid;gap:5px;padding:14px;background:#0d1233;border-radius:14px;justify-content:center}
-.pd{width:clamp(24px,4.2vh,34px);height:clamp(24px,4.2vh,34px);display:grid;place-items:center;
+.pdw{display:grid;gap:clamp(2px,.7vw,5px);padding:clamp(7px,1.6vw,14px);background:#0d1233;
+  border-radius:14px;width:100%;max-width:560px;margin:0 auto;box-sizing:border-box;
+  align-items:center;overflow:hidden}
+.pd{width:100%;max-width:clamp(24px,4.2vh,34px);aspect-ratio:1;min-width:0;justify-self:center;
+  display:grid;place-items:center;
   font-size:clamp(16px,3vh,23px);
   border-radius:8px;background:rgba(255,255,255,.04)}
 .pd.kosong{background:transparent;border:2px dashed #2a3566}
-.pdlbl{font-size:11px;color:var(--dim);font-weight:700;text-align:right;padding-right:9px;
-  display:grid;place-items:center;white-space:nowrap}
+.pdlbl{font-size:clamp(9px,2.4vw,11px);color:var(--dim);font-weight:700;text-align:right;
+  padding-right:clamp(4px,1.2vw,9px);min-width:0;overflow:hidden;
+  display:grid;place-items:center;
+  /* biar melilit dua baris, jangan dipotong */
+  white-space:normal;line-height:1.15;word-break:break-word}
 .svg3{display:block;margin:0 auto;max-height:26vh;width:auto;height:auto;max-width:100%}
 .objbar{height:34px;border-radius:8px;background:linear-gradient(90deg,#ef476f,#ff9f1c);
   box-shadow:0 3px 0 rgba(0,0,0,.3)}
@@ -627,7 +637,8 @@ h3.sub{font-size:clamp(11px,1.7vh,13px);color:var(--dim);margin:clamp(10px,2vh,2
   border:0;border-left:2px solid #333;background:transparent;color:#222;font:800 9px/1 inherit;
   padding:0;cursor:pointer;text-align:center}
 .garis-lukis-titik span{position:absolute;top:-16px;left:-8px;width:18px;text-align:center}
-.garis-lukis-titik:hover,.garis-lukis-titik:focus-visible{border-left-color:#ef476f;outline:none;color:#b51e43}
+
+.garis-lukis-titik:focus-visible{border-left-color:#ef476f;outline:none;color:#b51e43}
 .garis-lukis-titik.on{border-left-color:#ef476f;color:#b51e43}
 .lukis2d{position:relative;width:min(100%,280px);height:170px;margin:5px auto 8px;
   border:2px solid var(--line);border-radius:14px;background:#0b1235}
@@ -710,7 +721,7 @@ h3.sub{font-size:clamp(11px,1.7vh,13px);color:var(--dim);margin:clamp(10px,2vh,2
   font-size:clamp(18px,3vh,26px);font-weight:900;color:var(--txt);cursor:pointer;
   box-shadow:0 3px 0 #151b44;transition:transform .08s,background .12s,border-color .12s,box-shadow .08s;
   display:flex;align-items:center;justify-content:center;line-height:1}
-.pk:hover{background:#2f3c7d;border-color:var(--p4)}
+
 .pk:active{transform:scale(.93)}
 .pk.pk2{font-size:clamp(11px,1.85vh,15px);letter-spacing:.2px;
   background:#2a2036;border-color:#4a3a5c;white-space:nowrap}
@@ -782,7 +793,7 @@ h3.sub{font-size:clamp(11px,1.7vh,13px);color:var(--dim);margin:clamp(10px,2vh,2
   background:#171e4a;color:var(--dim);border:2px dashed #5260ad;border-radius:10px;
   padding:.25em .42em;text-align:right;font:900 clamp(18px,3.2vh,28px)/1.15 monospace;
   cursor:pointer;outline:none;transition:border-color .12s,background .12s,color .12s,box-shadow .12s}
-.teknik-input:hover{border-color:var(--p4);background:#1d275d}
+
 .teknik-input.aktif{border-style:solid;border-color:var(--p1);color:var(--p1);
   background:rgba(255,209,102,.08);box-shadow:0 0 0 4px rgba(255,209,102,.16)}
 .teknik-input.terisi{color:var(--p2);border-style:solid;border-color:#168d72}
@@ -1058,7 +1069,7 @@ h3.sub{font-size:clamp(11px,1.7vh,13px);color:var(--dim);margin:clamp(10px,2vh,2
   padding:clamp(7px,1.5vh,12px) clamp(6px,1.2vh,10px);text-align:center;cursor:pointer;
   font-size:clamp(13px,2.1vh,17px);font-weight:700;transition:all .12s;
   position:relative;min-width:0}
-.sitem:hover{border-color:var(--p4)}
+
 .sitem.pilih{border-color:var(--p1);background:rgba(255,209,102,.12)}
 .sitem.siap{border-color:var(--p2);background:rgba(6,214,160,.1)}
 .snum{position:absolute;top:-7px;right:4px;width:20px;height:20px;border-radius:50%;
@@ -1083,7 +1094,7 @@ h3.sub{font-size:clamp(11px,1.7vh,13px);color:var(--dim);margin:clamp(10px,2vh,2
   padding:clamp(7px,1.5vh,12px) clamp(6px,1.1vh,10px);
   border-radius:11px;background:var(--card2);border:2px solid var(--line);cursor:pointer;
   font-size:clamp(16px,3vh,25px);font-weight:900;color:var(--txt);transition:all .12s}
-.btile:hover{border-color:var(--p4);background:#2f3c7d}
+
 .btile.guna{opacity:.28;pointer-events:none}
 /* --- Petak 100 --- */
 .p100{display:grid;grid-template-columns:repeat(10,1fr);gap:1px;max-width:min(340px,84vw);
@@ -1213,6 +1224,26 @@ h3.sub{font-size:clamp(11px,1.7vh,13px);color:var(--dim);margin:clamp(10px,2vh,2
   .pecahan-soal-ringkas .jawab-pecahan-kotak{min-width:70px;min-height:34px;font-size:21px}
   .pecahan-soal-ringkas .jawab-pecahan-susun{min-width:76px}
 }
+
+/* ---- Kesan tuding HANYA untuk tetikus. ----
+   Pada skrin sentuh :hover melekat selepas ketikan, menyebabkan satu
+   kekunci kelihatan "dipilih" sebelum murid menekannya. */
+@media(hover:hover) and (pointer:fine){
+  .back:hover{background:var(--card2);border-color:var(--p4)}
+  .card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.35)}
+  .card.flat:hover{transform:none;box-shadow:none}
+  .row:hover{background:var(--card2);border-color:#5260ad;box-shadow:0 7px 18px rgba(0,0,0,.2)}
+  .opt:hover{border-color:var(--p4);background:#2f3c7d;transform:translateY(-1px)}
+  .btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+  .frac-shade-part:hover{background:#1d2b67;outline:3px solid #4cc9f0;outline-offset:-3px}
+  .gc:hover{background:var(--card2)}
+  .hole:hover{border-color:var(--p1)}
+  .garis-lukis-titik:hover{border-left-color:#ef476f;outline:none;color:#b51e43}
+  .pk:hover{background:#2f3c7d;border-color:var(--p4)}
+  .teknik-input:hover{border-color:var(--p4);background:#1d275d}
+  .sitem:hover{border-color:var(--p4)}
+  .btile:hover{border-color:var(--p4);background:#2f3c7d}
+}
 </style>
 </head>
 <body>
@@ -1224,6 +1255,40 @@ h3.sub{font-size:clamp(11px,1.7vh,13px);color:var(--dim);margin:clamp(10px,2vh,2
    Skema: Tahun > Jilid > ID_Unit > ID_Subtopik > Aktiviti
    Sumber: Buku Teks & Buku Aktiviti KSSR Semakan (DBP/KPM)
    ========================================================================= */
+/* ===================== VERSI & KEMAS KINI AUTOMATIK =====================
+   Naikkan VERSI setiap kali ada perubahan. bina-luar-talian.py akan
+   menyalin nombor ini ke versi.json secara automatik, jadi kedua-duanya
+   tidak boleh terpesong.
+
+   Aplikasi yang ditambah ke Skrin Utama iPhone menyimpan salinan lama.
+   Kod di bawah menyemak versi.json di pelayan setiap kali aplikasi dibuka
+   (dan setiap kali dikembalikan ke hadapan), kemudian memuat semula
+   sendiri jika ada versi baharu. */
+const VERSI="1.1";
+
+let SEMAK_TERAKHIR=0;
+async function semakVersiBaharu(paksa){
+  // fail tempatan (dibuka terus dari cakera) tiada pelayan untuk disemak
+  if(location.protocol==="file:")return;
+  const kini=Date.now();
+  if(!paksa&&kini-SEMAK_TERAKHIR<60000)return;   // paling kerap sekali seminit
+  SEMAK_TERAKHIR=kini;
+  try{
+    const r=await fetch("versi.json?t="+kini,{cache:"no-store"});
+    if(!r.ok)return;
+    const data=await r.json();
+    if(!data||!data.versi||data.versi===VERSI)return;
+    // Ada versi baharu — kosongkan cache dan muat semula.
+    if(window.caches&&caches.keys)
+      try{(await caches.keys()).forEach(k=>caches.delete(k));}catch(e){}
+    location.reload();
+  }catch(e){ /* tiada internet — teruskan guna versi sedia ada */ }
+}
+addEventListener("load",()=>semakVersiBaharu(true));
+document.addEventListener("visibilitychange",()=>{
+  if(!document.hidden)semakVersiBaharu(false);
+});
+
 const CURR = {
 1:{ nama:"Tahun 1", warna:"var(--p1)", had:"Nombor hingga 100", hadNombor:100, sah:true, unit:[
  {id:"T1_U1",n:"Nombor Hingga 100",j:1,ic:"🔢",s:[
@@ -1845,6 +1910,7 @@ function vHome(){
     </div>`;}).join("");
   app.innerHTML=`
   <div class="top">
+    <span class="versi" id="labelVersi" title="Versi aplikasi">v${VERSI}</span>
     <div class="crumb"></div>
     <button class="back" onclick="go('kemajuan')">📊 Kemajuan</button>
     <div class="coin">⭐ ${fmt(S.skor)}</div>
@@ -1855,12 +1921,7 @@ function vHome(){
   </div>
   <div class="skrin">
   <h2 class="sec">Pilih Tahun</h2>
-  <div class="grid g3">${kad}</div>
-  <div class="note-b">
-    <b>Nota guru:</b> Tahun 1, 2 dan 3 dipetakan terus daripada Buku Teks & Buku Aktiviti KSSR Semakan
-    (rujukan halaman disertakan). Tahun 4, 5 dan 6 disusun mengikut rangka DSKP —
-    rujukan halaman buku teks belum disahkan.
-  </div></div>`;
+  <div class="grid g3">${kad}</div></div>`;
 }
 
 /* ---------- Skrin: Senarai Unit ---------- */
@@ -1971,7 +2032,9 @@ function padanan(a,b,e1,e2,l1,l2){
     r1+=`<div class="pd${i<a?"":" kosong"}">${i<a?e1:""}</div>`;
     r2+=`<div class="pd${i<b?"":" kosong"}">${i<b?e2:""}</div>`;
   }
-  return `<div class="pdw" style="grid-template-columns:auto repeat(${m},34px)">${r1}${r2}</div>
+  // Lajur BOLEH mengecil (minmax) supaya 10-12 objek tetap muat pada telefon.
+  // Dahulu 34px tetap - barisnya terkeluar skrin dan terpotong.
+  return `<div class="pdw" style="grid-template-columns:auto repeat(${m},minmax(0,1fr))">${r1}${r2}</div>
     <div class="hint">Padankan satu dengan satu. Baris mana ada lebihan?</div>`;
 }
 /* bar objek + unit ukuran di bawahnya */
@@ -7793,26 +7856,48 @@ function muatSatuMuka(){
   const luar=document.querySelector(".skrin.aktiviti .isi");
   const dalam=document.getElementById("isiDalam");
   if(!luar||!dalam)return;
+  // Tanggalkan skala DAHULU sebelum mengukur. Tanpa ini, ukuran kedua
+  // dikira atas kandungan yang sudah dikecilkan, jadi ia tidak pernah
+  // membetulkan dirinya — itu sebab papan kekunci masih terpotong.
+  dalam.style.transform="none";
   const tinggiAda=Math.max(1,luar.clientHeight-2);
   const lebarAda=Math.max(1,luar.clientWidth-2);
-  const tinggiPerlu=Math.max(1,dalam.scrollHeight);
-  const lebarPerlu=Math.max(1,dalam.scrollWidth);
-  const skala=Math.max(.66,Math.min(1,tinggiAda/tinggiPerlu,lebarAda/lebarPerlu));
-  dalam.style.transform=`scale(${skala.toFixed(3)})`;
+  const tinggiPerlu=Math.max(1,dalam.scrollHeight,dalam.offsetHeight);
+  const lebarPerlu=Math.max(1,dalam.scrollWidth,dalam.offsetWidth);
+  const skala=Math.max(.5,Math.min(1,tinggiAda/tinggiPerlu,lebarAda/lebarPerlu));
+  dalam.style.transform=skala>=.999?"none":`scale(${skala.toFixed(3)})`;
   dalam.setAttribute("data-skala",skala.toFixed(3));
 }
 function jadualMuat(){
   cancelAnimationFrame(RAF_MUAT);
-  RAF_MUAT=requestAnimationFrame(muatSatuMuka);
+  RAF_MUAT=requestAnimationFrame(()=>requestAnimationFrame(muatSatuMuka));
 }
+let PEMERHATI_SAIZ=null,MASA_MUAT=[];
 function pantauMuatSatuMuka(){
   if(PEMERHATI_MUAT)PEMERHATI_MUAT.disconnect();
+  if(PEMERHATI_SAIZ)PEMERHATI_SAIZ.disconnect();
+  MASA_MUAT.forEach(clearTimeout);MASA_MUAT=[];
   const st=document.querySelector(".skrin.aktiviti .stage");
   if(!st)return;
   PEMERHATI_MUAT=new MutationObserver(jadualMuat);
   PEMERHATI_MUAT.observe(st,{childList:true,subtree:true,characterData:true});
+  // Bar alamat Safari & papan kekunci boleh menukar tinggi selepas paparan;
+  // ResizeObserver menangkap perubahan itu.
+  if(window.ResizeObserver){
+    PEMERHATI_SAIZ=new ResizeObserver(jadualMuat);
+    PEMERHATI_SAIZ.observe(st);
+    const isi=st.querySelector(".isi"); if(isi)PEMERHATI_SAIZ.observe(isi);
+  }
+  // emoji dan gambar selesai dimuat selepas bingkai pertama
+  st.querySelectorAll("img").forEach(im=>{
+    if(!im.complete)im.addEventListener("load",jadualMuat,{once:true});
+  });
   jadualMuat();
+  MASA_MUAT=[60,220,600].map(ms=>setTimeout(muatSatuMuka,ms));
 }
+addEventListener("resize",jadualMuat);
+addEventListener("orientationchange",()=>setTimeout(muatSatuMuka,250));
+if(window.visualViewport)visualViewport.addEventListener("resize",jadualMuat);
 function paparSoalan(){
   const t=nav.t,u=AK.unit,s=AK.sub;
   if(AK.i>=AK.soal.length)return paparRingkasan();
