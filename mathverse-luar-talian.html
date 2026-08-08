@@ -2003,7 +2003,7 @@ function wangMalaysia(nilaiSen,opt={}){
     const asas=kertas?`wang-kertas-msia wang-kertas-foto rm${nilaiSen/100}`
                      :`wang-syiling-msia wang-syiling-foto sen${nilaiSen}`;
     return `<div class="${asas}${belakang}${mini}" role="img" aria-label="${label}">
-      <img src="${foto}" alt="${label}" loading="lazy" decoding="async"></div>`;
+      <img src="${foto}" alt="${label}" decoding="sync"></div>`;
   }
   // sandaran: lukis dengan CSS jika foto tiada
   if(kertas){

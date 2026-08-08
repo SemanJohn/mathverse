@@ -3,8 +3,10 @@
 Aplikasi Matematik interaktif untuk **KSSR Semakan Tahun 1–6**, dalam Bahasa Melayu.
 Berpandukan Buku Teks dan DSKP KPM/DBP.
 
-**Cuba di sini:** `https://<nama-pengguna>.github.io/mathverse/`
-_(gantikan `<nama-pengguna>` dengan nama pengguna GitHub anda selepas GitHub Pages diaktifkan)_
+**Cuba di sini: https://semanjohn.github.io/mathverse/**
+
+Buka pautan itu di Safari iPhone/iPad → Kongsi → **Tambah ke Skrin Utama**,
+dan ia berjalan skrin penuh seperti aplikasi biasa.
 
 ---
 
