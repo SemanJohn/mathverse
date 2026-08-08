@@ -9,6 +9,9 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="MathVerse">
 <meta name="theme-color" content="#0e1430">
+<link rel="apple-touch-icon" href="assets/ikon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/ikon/favicon-32.png">
+<link rel="manifest" href="manifest.json">
 <title>MathVerse — Matematik KSSR Tahun 1–6</title>
 <style>
 :root{
@@ -1264,7 +1267,7 @@ h3.sub{font-size:clamp(11px,1.7vh,13px);color:var(--dim);margin:clamp(10px,2vh,2
    Kod di bawah menyemak versi.json di pelayan setiap kali aplikasi dibuka
    (dan setiap kali dikembalikan ke hadapan), kemudian memuat semula
    sendiri jika ada versi baharu. */
-const VERSI="1.1";
+const VERSI="1.2";
 
 let SEMAK_TERAKHIR=0;
 async function semakVersiBaharu(paksa){

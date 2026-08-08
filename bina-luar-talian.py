@@ -44,6 +44,20 @@ def main():
     tamat = html.index("});", mula) + 3      # blok Proxy berakhir dengan "});"
     html  = html[:mula] + "const WANG_FOTO=" + json.dumps(peta, separators=(",", ":")) + ";" + html[tamat:]
 
+    # ---- 3. benamkan ikon supaya versi luar talian ada logo juga ----
+    ikon = os.path.join(ASAS, "assets", "ikon")
+    for nama, saiz in (("apple-touch-icon.png", None), ("favicon-32.png", "32x32")):
+        laluan = os.path.join(ikon, nama)
+        if not os.path.exists(laluan):
+            continue
+        with open(laluan, "rb") as f:
+            data = "data:image/png;base64," + base64.b64encode(f.read()).decode()
+        rel = "apple-touch-icon" if saiz is None else "icon"
+        html = re.sub(r'<link rel="%s"[^>]*>' % rel,
+                      '<link rel="%s"%s href="%s">' % (rel, ' type="image/png" sizes="32x32"' if saiz else "", data),
+                      html, count=1)
+    html = re.sub(r'\s*<link rel="manifest"[^>]*>', "", html, count=1)
+
     io.open(HASIL, "w", encoding="utf-8").write(html)
     print("%d gambar dibenamkan -> %s (%d KB)"
           % (len(peta), os.path.basename(HASIL), len(html) // 1024))
