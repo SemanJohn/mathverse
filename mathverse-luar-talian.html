@@ -124,11 +124,17 @@ h3.sub{font-size:clamp(11px,1.7vh,13px);color:var(--dim);margin:clamp(10px,2vh,2
 /* ---------- activity stage ---------- */
 .stage{background:linear-gradient(180deg,rgba(40,51,107,.76),rgba(30,39,87,.96));
   border:1px solid #46529a;border-radius:20px;box-shadow:0 14px 36px rgba(0,0,0,.22);
-  padding:clamp(10px,2vh,20px);flex:1;display:flex;flex-direction:column;
+  padding:clamp(10px,2vh,20px);flex:1;min-height:0;display:flex;flex-direction:column;
   position:relative}
 /* Hanya bekas kandungan di dalam .stage. Diskopkan supaya nama kelas "isi"
-   tidak sesekali melanggar mana-mana kotak jawapan di dalamnya. */
-.stage>.isi{flex:1;display:flex;flex-direction:column;justify-content:flex-start}
+   tidak sesekali melanggar mana-mana kotak jawapan di dalamnya.
+   min-height:0 (BUKAN overflow:hidden — itu punca bug v1.2 yang memotong
+   papan kekunci tanpa cara untuk skrol) membolehkan .isi mengecut kepada
+   ruang sebenar yang ada, supaya muatSatuMuka() dapat ukur ruang betul dan
+   skalakan kandungan. Limpahan yang tidak muat walaupun selepas diskalakan
+   tetap kelihatan (overflow:visible) dan boleh dicapai kerana .skrin.aktiviti
+   di atasnya mengekalkan overflow-y:auto. */
+.stage>.isi{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:flex-start}
 /* Zon input (papan kekunci, kotak jawapan) sentiasa dipaku ke bawah pentas,
    supaya soalan di atas dan papan di bawah — kekal di semua saiz skrin. */
 .isi-dalam{flex:1;width:100%;display:flex;flex-direction:column;
@@ -1264,7 +1270,7 @@ h3.sub{font-size:clamp(11px,1.7vh,13px);color:var(--dim);margin:clamp(10px,2vh,2
    Kod di bawah menyemak versi.json di pelayan setiap kali aplikasi dibuka
    (dan setiap kali dikembalikan ke hadapan), kemudian memuat semula
    sendiri jika ada versi baharu. */
-const VERSI="1.4";
+const VERSI="1.5";
 
 let SEMAK_TERAKHIR=0;
 async function semakVersiBaharu(paksa){
