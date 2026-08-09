@@ -1271,7 +1271,7 @@ h3.sub{font-size:clamp(11px,1.7vh,13px);color:var(--dim);margin:clamp(10px,2vh,2
    Kod di bawah menyemak versi.json di pelayan setiap kali aplikasi dibuka
    (dan setiap kali dikembalikan ke hadapan), kemudian memuat semula
    sendiri jika ada versi baharu. */
-const VERSI="1.5";
+const VERSI="1.6";
 
 let SEMAK_TERAKHIR=0;
 async function semakVersiBaharu(paksa){
@@ -5565,7 +5565,7 @@ ENJIN.pecahan=c=>{
       );
     }
     if(c.mangkuk)return{mod:"interaktif",interaksi:"teknik-mangkuk-campur",
-      q:`Tukar pecahan tak wajar ${peng}/${bhg} kepada nombor bercampur menggunakan teknik mangkuk.`,
+      q:`Tukar pecahan tak wajar ${peng}/${bhg} kepada nombor bercampur.`,
       vis:komponenMangkukCampur(peng,bhg,bulat,baki),cek:()=>MANGKUKCbetul(),ansVal:betul,
       hint:`${peng} &divide; ${bhg} = ${bulat} baki ${baki}. Hasil bahagi ialah nombor bulat, baki ialah pengangka dan pembahagi ialah penyebut.`};
     return soalPecahanBerlangkah(
@@ -5763,7 +5763,7 @@ function MANGKUKdraw(){
   if(turun)turun.classList.toggle("nampak",MANGKUK.i>0);
   if(MANGKUK.i===0){
     arahan.innerHTML=`${MANGKUK.q} tidak boleh membahagi ${MANGKUK.p}. Tulis <b>0</b> pada rumah sa.`;
-    if(maklum)maklum.textContent="Penyebut di luar mangkuk, pengangka di dalam mangkuk.";
+    if(maklum)maklum.textContent="Penyebut di luar petak bahagi, pengangka di dalam petak bahagi.";
   }else if(MANGKUK.i===1){
     arahan.innerHTML=`Titik perpuluhan dan sifar dimasukkan secara automatik. Sekarang ${MANGKUK.p*10} &divide; ${MANGKUK.q} = <b>?</b>`;
     if(maklum)maklum.textContent=`${MANGKUK.p} menjadi ${MANGKUK.p}0 supaya pembahagian boleh diteruskan.`;
@@ -5798,7 +5798,7 @@ let MANGKUKC={peng:0,bhg:1,bulat:0,baki:0,produk:0,i:0,inp:"",jawab:[]};
 function komponenMangkukCampur(peng,bhg,bulat,baki){
   return `<div id="mangkukCampurWrap" class="mangkuk-campur-wrap" data-peng="${peng}"
       data-bhg="${bhg}" data-bulat="${bulat}" data-baki="${baki}">
-    <div class="mangkuk-campur-papan" role="img" aria-label="Teknik mangkuk ${peng} bahagi ${bhg}">
+    <div class="mangkuk-campur-papan" role="img" aria-label="Bahagi panjang ${peng} bahagi ${bhg}">
       <div class="mkc-label-atas">hasil bahagi</div>
       <div class="mkc-hasil mkc-kosong" id="mkcHasil">?</div>
       <div class="mkc-pembahagi" id="mkcPembahagi">${bhg}</div>
@@ -5831,13 +5831,13 @@ function MANGKUKCdraw(){
   const bul=c.i>0?c.jawab[0]:"?",bak=c.i>2?c.jawab[2]:"?",pen=c.i>3?c.jawab[3]:"?";
   if(j)j.innerHTML=`${pecahanBadge(c.peng,c.bhg)} <b>=</b><span class="mkc-campur"><span>${bul}</span>${pecahanBadge(bak,pen)}</span>`;
   if(c.i===0){a.innerHTML=`Bahagi pengangka dengan penyebut: ${c.peng} &divide; ${c.bhg} = <b>?</b>`;
-    if(m)m.textContent="Tulis hasil bahagi sebagai nombor bulat di atas mangkuk.";}
+    if(m)m.textContent="Tulis hasil bahagi sebagai nombor bulat di atas petak bahagi.";}
   else if(c.i===1){a.innerHTML=`Darab hasil bahagi dengan pembahagi: ${c.bulat} &times; ${c.bhg} = <b>?</b>`;
     if(m)m.textContent="Tulis hasil darab di bawah pengangka.";}
   else if(c.i===2){a.innerHTML=`Tolak untuk mendapatkan baki: ${c.peng} - ${c.produk} = <b>?</b>`;
     if(m)m.textContent="Baki akan menjadi pengangka pecahan wajar.";}
   else if(c.i===3){a.innerHTML=`Pembahagi dikekalkan sebagai penyebut. Tulis <b>${c.bhg}</b>.`;
-    if(m)m.textContent="Pembahagi dalam mangkuk menjadi penyebut jawapan.";}
+    if(m)m.textContent="Pembahagi tadi menjadi penyebut jawapan.";}
   else{a.innerHTML=`Selesai: ${c.peng} &divide; ${c.bhg} = <b>${c.bulat} baki ${c.baki}</b>`;
     if(m)m.innerHTML=`<span style="color:var(--p1)">Hasil bahagi = nombor bulat</span> &nbsp; <span style="color:var(--p4)">baki = pengangka</span> &nbsp; <span style="color:var(--p2)">pembahagi = penyebut</span>.`;}
   if(btn)btn.textContent=c.i>=3?"✓ Semak":"Seterusnya ›";
@@ -5872,9 +5872,9 @@ ENJIN.perpuluhan=c=>()=>{
     // bundarkan supaya tiada ralat titik terapung (0.2 + 0.1 = 0.30000000000000004)
     const bulat=x=>String(Math.round(x*1000)/1000);
     if(c.persepuluh)return{mod:"interaktif",interaksi:"teknik-mangkuk",
-      q:`Tukar pecahan ${p}/${q} kepada perpuluhan menggunakan teknik mangkuk.`,
+      q:`Tukar pecahan ${p}/${q} kepada perpuluhan.`,
       vis:komponenMangkuk(p,q,d),cek:()=>MANGKUKbetul(),ansVal:d,
-      hint:`Letakkan ${q} di luar mangkuk dan ${p} di dalam. ${p} &divide; ${q} = ${d}.`};
+      hint:`Letakkan ${q} di luar petak bahagi dan ${p} di dalam. ${p} &divide; ${q} = ${d}.`};
     return{q:`Tukar pecahan ${p}/${q} kepada perpuluhan`,
       vis:fracbar(Math.min(q,10),Array.from({length:Math.round(p/q*Math.min(q,10))},(_,i)=>i)),
       opts:shuffle([d,bulat(+d*10),bulat(+d/10),bulat(+d+0.1)])
