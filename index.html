@@ -48,7 +48,7 @@ body{
 .skrin{flex:1;min-height:0;display:flex;flex-direction:column;
   overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;
   scrollbar-width:thin;scrollbar-color:var(--line) transparent}
-.skrin.aktiviti{overflow:hidden}
+.skrin.aktiviti{overflow-y:auto;overflow-x:hidden}
 .skrin::-webkit-scrollbar{width:6px}
 .skrin::-webkit-scrollbar-thumb{background:var(--line);border-radius:99px}
 .hide{display:none!important}
@@ -125,16 +125,15 @@ h3.sub{font-size:clamp(11px,1.7vh,13px);color:var(--dim);margin:clamp(10px,2vh,2
 /* ---------- activity stage ---------- */
 .stage{background:linear-gradient(180deg,rgba(40,51,107,.76),rgba(30,39,87,.96));
   border:1px solid #46529a;border-radius:20px;box-shadow:0 14px 36px rgba(0,0,0,.22);
-  padding:clamp(10px,2vh,20px);flex:1;min-height:0;display:flex;flex-direction:column;
+  padding:clamp(10px,2vh,20px);flex:1;display:flex;flex-direction:column;
   position:relative}
 /* Hanya bekas kandungan di dalam .stage. Diskopkan supaya nama kelas "isi"
    tidak sesekali melanggar mana-mana kotak jawapan di dalamnya. */
-.stage>.isi{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:flex-start;
-  overflow:hidden}
+.stage>.isi{flex:1;display:flex;flex-direction:column;justify-content:flex-start}
 /* Zon input (papan kekunci, kotak jawapan) sentiasa dipaku ke bawah pentas,
    supaya soalan di atas dan papan di bawah — kekal di semua saiz skrin. */
-.isi-dalam{flex:1;min-height:0;width:100%;display:flex;flex-direction:column;
-  justify-content:flex-start;overflow:hidden;gap:clamp(2px,.7vh,6px);
+.isi-dalam{flex:1;width:100%;display:flex;flex-direction:column;
+  justify-content:flex-start;gap:clamp(2px,.7vh,6px);
   transform-origin:top center;transition:transform .12s ease-out}
 /* Soalan di atas, papan kekunci dipaku ke bawah — kedudukan sama di semua saiz skrin. */
 .isi-dalam>.inpbox,.isi-dalam>.slots,.isi-dalam>.padact{flex:none}
@@ -142,7 +141,7 @@ h3.sub{font-size:clamp(11px,1.7vh,13px);color:var(--dim);margin:clamp(10px,2vh,2
 /* petua di bawah papan tidak menolak papan ke atas */
 .isi-dalam>.pad~.hint,.isi-dalam>.kbd~.hint,.isi-dalam>.padact~.hint{flex:none;margin-top:6px}
 /* visual soalan mengecil dahulu apabila skrin sempit, papan kekunci kekal besar */
-.isi-dalam>.objwrap,.isi-dalam>.vis{flex:0 1 auto;min-height:0;overflow:hidden}
+.isi-dalam>.objwrap,.isi-dalam>.vis{flex:none}
 @media(min-height:720px) and (max-width:900px){
   /* ruang lebihan dibahagi dua: soalan turun sedikit dari bar atas,
      jawapan kekal dalam jangkauan ibu jari - tiada lagi lompang besar */
@@ -211,14 +210,13 @@ h3.sub{font-size:clamp(11px,1.7vh,13px);color:var(--dim);margin:clamp(10px,2vh,2
 /* ---------- shared visual bits ---------- */
 .objwrap{display:flex;flex-wrap:wrap;gap:clamp(4px,.8vh,7px);justify-content:center;
   padding:clamp(8px,1.6vh,14px);background:#0d1233;border-radius:14px;
-  min-height:clamp(48px,8vh,70px);align-content:center;max-height:34vh;overflow:auto;flex:none}
+  min-height:clamp(48px,8vh,70px);align-content:center;flex:none}
 .obj{font-size:clamp(19px,3.4vh,29px);line-height:1}
 .vs{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;max-width:620px;margin:0 auto}
 .vs .lbl{text-align:center;font-size:12px;color:var(--dim);margin-bottom:6px;font-weight:700}
 .vsx{font-size:22px;color:var(--dim);font-weight:900}
 .blocks{display:flex;gap:clamp(8px,1.8vh,16px);justify-content:center;flex-wrap:wrap;
-  padding:clamp(8px,1.6vh,14px);background:#0d1233;border-radius:14px;flex:none;
-  max-height:30vh;overflow:auto}
+  padding:clamp(8px,1.6vh,14px);background:#0d1233;border-radius:14px;flex:none}
 .bcol{text-align:center}
 .bcol .bl{font-size:11px;color:var(--dim);font-weight:700;margin-bottom:7px;text-transform:uppercase;letter-spacing:.5px}
 /* Blok Dienes — setiap kiub dilukis berasingan supaya murid nampak 10 kiub bercantum */
@@ -577,7 +575,7 @@ h3.sub{font-size:clamp(11px,1.7vh,13px);color:var(--dim);margin:clamp(10px,2vh,2
 /* objek dikumpulkan supaya murid membilang secara berkumpulan */
 .kump{display:flex;flex-wrap:wrap;gap:clamp(5px,1.2vh,10px);justify-content:center;
   align-items:center;padding:clamp(6px,1.4vh,12px);background:#0d1233;border-radius:14px;
-  flex:none;max-height:34vh;overflow:auto}
+  flex:none}
 .kbox{display:flex;flex-wrap:wrap;gap:clamp(2px,.6vh,4px);padding:clamp(4px,.9vh,7px);
   background:rgba(255,255,255,.05);border:1.5px solid var(--line);border-radius:9px;
   align-items:center;justify-content:center}
@@ -593,7 +591,7 @@ h3.sub{font-size:clamp(11px,1.7vh,13px);color:var(--dim);margin:clamp(10px,2vh,2
 /* persamaan bergambar: [objek] + [?] = [jumlah] */
 .pers{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;
   gap:clamp(4px,1vh,10px);padding:clamp(6px,1.4vh,12px);background:#0d1233;
-  border-radius:14px;flex:none;max-height:34vh;overflow:auto}
+  border-radius:14px;flex:none}
 .pbox{background:rgba(255,255,255,.05);border:2px solid var(--line);border-radius:12px;
   padding:clamp(5px,1.1vh,9px);min-width:clamp(52px,9vh,74px);min-height:clamp(46px,8vh,66px);
   display:flex;flex-wrap:wrap;gap:3px;align-items:center;justify-content:center}
@@ -1142,7 +1140,7 @@ h3.sub{font-size:clamp(11px,1.7vh,13px);color:var(--dim);margin:clamp(10px,2vh,2
   font-size:clamp(11px,1.7vh,13px);color:#ffe4a3;line-height:1.45;margin-top:clamp(8px,1.6vh,14px);flex:none}
 .ref{background:#0d1233;border:1px solid var(--line);border-radius:12px;
   padding:clamp(9px,1.8vh,15px);font-size:clamp(12px,1.9vh,14px);line-height:1.55;
-  margin:clamp(6px,1.4vh,14px) 0;flex:none;max-height:30vh;overflow:auto}
+  margin:clamp(6px,1.4vh,14px) 0;flex:none}
 .ref b{color:var(--p4)}
 .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(90px);
   background:linear-gradient(135deg,#06d6a0,#059669);color:#03271b;font-weight:800;
@@ -1183,7 +1181,7 @@ h3.sub{font-size:clamp(11px,1.7vh,13px);color:var(--dim);margin:clamp(10px,2vh,2
   .kbdrow{gap:3px}
   .inpbox{min-height:42px;font-size:25px;margin:4px auto 4px;padding:6px 10px}
   .inpbox.huruf{font-size:16px;letter-spacing:1px;line-height:1.1}
-  .objwrap{padding:5px;max-height:20vh;min-height:34px;gap:3px}
+  .objwrap{padding:5px;min-height:34px;gap:3px}
   .obj{font-size:17px}
   .stage{padding:8px}
   .q{font-size:14px;margin:0 0 4px}
@@ -1267,7 +1265,7 @@ h3.sub{font-size:clamp(11px,1.7vh,13px);color:var(--dim);margin:clamp(10px,2vh,2
    Kod di bawah menyemak versi.json di pelayan setiap kali aplikasi dibuka
    (dan setiap kali dikembalikan ke hadapan), kemudian memuat semula
    sendiri jika ada versi baharu. */
-const VERSI="1.2";
+const VERSI="1.3";
 
 let SEMAK_TERAKHIR=0;
 async function semakVersiBaharu(paksa){
@@ -5243,7 +5241,7 @@ ENJIN.sifir=c=>()=>{
     }).join("");
     return{mod:"interaktif",
       q:`Lengkapkan <b>sifir ${bahagi?"bahagi":"darab"} ${s}</b>`,
-      vis:`<div class="ref" style="max-height:26vh"><table style="margin:0 auto">${baris}</table></div>`
+      vis:`<div class="ref"><table style="margin:0 auto">${baris}</table></div>`
         +komponenIsi(urutan,kosong,umpanBank(urutan,2,120),
           "Klik nombor di bawah untuk melengkapkan sifir."),
       cek:()=>ISIbetul(),
