@@ -553,12 +553,13 @@ h3.sub{font-size:clamp(11px,1.7vh,13px);color:var(--dim);margin:clamp(10px,2vh,2
   .frac-circle{width:84px}.frac-tile-grid{grid-template-columns:repeat(var(--kol),minmax(32px,48px))}
   .frac-object{width:38px;height:38px;font-size:21px}
 }
-.grid2d{display:grid;gap:2px;margin:16px auto;justify-content:center}
-.gc{width:clamp(24px,4.4vh,34px);height:clamp(24px,4.4vh,34px);background:#0d1233;border:1px solid var(--line);border-radius:5px;
-  cursor:pointer;display:grid;place-items:center;font-size:17px}
-
-.gc.sel{background:var(--p2)}
-.axl{font-size:11px;color:var(--dim);text-align:center}
+/* Satah Cartes sebenar: nombor paksi pada GARISAN grid, titik pada PERSILANGAN
+   garisan — bukan kekisi kotak/sel. Lihat papanKoordinat(). */
+.papan2d-wrap{flex:none;margin:12px auto;background:#0d1233;border-radius:14px;
+  padding:clamp(6px,1.4vh,12px)}
+.papan2d{display:block;width:100%;height:auto}
+.kp{cursor:pointer;fill:transparent}
+.kp.sel{fill:var(--p2);opacity:.45}
 .bars{display:flex;gap:14px;align-items:flex-end;justify-content:center;height:min(190px,26vh);
   padding:14px;background:#0d1233;border-radius:14px;margin:clamp(6px,1.4vh,14px) 0;flex:none}
 .bcell{text-align:center;display:flex;flex-direction:column;justify-content:flex-end;height:100%}
@@ -1270,7 +1271,7 @@ h3.sub{font-size:clamp(11px,1.7vh,13px);color:var(--dim);margin:clamp(10px,2vh,2
    Kod di bawah menyemak versi.json di pelayan setiap kali aplikasi dibuka
    (dan setiap kali dikembalikan ke hadapan), kemudian memuat semula
    sendiri jika ada versi baharu. */
-const VERSI="1.6";
+const VERSI="1.7";
 
 let SEMAK_TERAKHIR=0;
 async function semakVersiBaharu(paksa){
@@ -4583,14 +4584,8 @@ ENJIN.jarakKoordinat=c=>()=>{
   if(ruang<2)return ENJIN.jarakKoordinat(c)();
   const jarak=R(2,Math.min(5,ruang));
   const x2=mendatar?x1+jarak:x1, y2=mendatar?y1:y1+jarak;
-  let g="";
-  for(let r=n;r>=1;r--){g+=`<div class="axl">${r}</div>`;
-    for(let cx=1;cx<=n;cx++){
-      const isA=(cx===x1&&r===y1),isB=(cx===x2&&r===y2);
-      g+=`<div class="gc">${isA?"🔴":isB?"🔵":""}</div>`;}}
-  g+='<div class="axl"></div>';for(let i=1;i<=n;i++)g+=`<div class="axl">${i}</div>`;
   return{q:`Berapakah <b>jarak</b> antara titik 🔴 (${x1}, ${y1}) dan 🔵 (${x2}, ${y2})?`,
-    vis:`<div class="grid2d" style="grid-template-columns:24px repeat(${n},clamp(18px,3.2vh,28px))">${g}</div>`,
+    vis:papanKoordinat(n,{titik:[{x:x1,y:y1,isi:"🔴"},{x:x2,y:y2,isi:"🔵"}]}),
     opts:shuffle([...new Set([`${jarak} unit`,`${jarak+1} unit`,`${Math.max(1,jarak-1)} unit`,`${jarak*2} unit`])]).slice(0,4),
     ans:-1,ansVal:`${jarak} unit`,
     hint:mendatar?`Kedua-dua titik berada pada paksi-y yang sama. Jarak = ${x2} − ${x1} = <b>${jarak} unit</b>.`
@@ -6774,34 +6769,66 @@ ENJIN.simetri=c=>()=>{
 };
 
 /* --- Koordinat --- */
+/* Satah Cartes betul: nombor paksi duduk PADA garisan grid (bukan tengah
+   kotak) dan titik dilukis TEPAT pada persilangan garisan, asalan (0,0) di
+   sudut kiri bawah — ikut buku teks KSSR (m/s 215-217, 235-237). Setiap
+   persilangan (x,y) ditukar kepada koordinat SVG melalui sx()/sy() supaya
+   pengiraan kedudukan sentiasa tekal sama ada untuk garisan, label, titik
+   atau kawasan klik. */
 let KRD=null;
+function papanKoordinat(n,opt){
+  opt=opt||{};
+  const titik=opt.titik||[],klik=!!opt.klik;
+  const padL=1.2,padT=0.55,padR=0.5,padB=0.85;
+  const lebar=padL+n+padR,tinggi=padT+n+padB;
+  const sx=x=>padL+x,sy=y=>padT+(n-y);
+  const fs=0.34;
+  let garis="";
+  for(let i=0;i<=n;i++){
+    const w=i===0?0.045:0.02;
+    garis+=`<line x1="${sx(i)}" y1="${sy(0)}" x2="${sx(i)}" y2="${sy(n)}" stroke="var(--line)" stroke-width="${w}"/>`;
+    garis+=`<line x1="${sx(0)}" y1="${sy(i)}" x2="${sx(n)}" y2="${sy(i)}" stroke="var(--line)" stroke-width="${w}"/>`;
+  }
+  let label=`<text x="${(sx(0)-fs*0.9).toFixed(2)}" y="${(sy(0)+fs*1.9).toFixed(2)}" font-size="${fs}" fill="var(--dim)" text-anchor="end">O</text>`;
+  for(let i=1;i<=n;i++){
+    label+=`<text x="${sx(i)}" y="${(sy(0)+fs*1.9).toFixed(2)}" font-size="${fs}" fill="var(--dim)" text-anchor="middle">${i}</text>`;
+    label+=`<text x="${(sx(0)-fs*0.9).toFixed(2)}" y="${sy(i)}" font-size="${fs}" fill="var(--dim)" text-anchor="end" dominant-baseline="middle">${i}</text>`;
+  }
+  const titikHtml=titik.map(t=>
+    `<text x="${sx(t.x)}" y="${sy(t.y)}" font-size="0.6" text-anchor="middle" dominant-baseline="central">${t.isi}</text>`
+  ).join("");
+  let klikHtml="";
+  if(klik){
+    for(let x=0;x<=n;x++)for(let y=0;y<=n;y++){
+      klikHtml+=`<rect id="kp${x}_${y}" class="kp" x="${(sx(x)-.5).toFixed(2)}" y="${(sy(y)-.5).toFixed(2)}"
+        width="1" height="1" onclick="KRDsel(${x},${y})"/>`;
+    }
+  }
+  const a11y=klik?"":` role="img" aria-label="Satah Cartes ${n} kali ${n}"`;
+  return `<div class="papan2d-wrap" style="max-width:${Math.round((n+padL+padR)*32)}px">
+    <svg class="papan2d" viewBox="0 0 ${lebar.toFixed(2)} ${tinggi.toFixed(2)}"${a11y}>
+      ${garis}${label}${titikHtml}${klikHtml}
+    </svg></div>`;
+}
 ENJIN.koordinat=c=>()=>{
   const n=c.saiz||6;const x=R(1,n),y=R(1,n);KRD=null;
   const mod=Math.random()<.5;
   if(mod){
-    let g="";
-    for(let r=n;r>=1;r--){g+=`<div class="axl">${r}</div>`;
-      for(let ccx=1;ccx<=n;ccx++)g+=`<div class="gc">${(ccx===x&&r===y)?"⭐":""}</div>`;}
-    g+='<div class="axl"></div>';for(let i=1;i<=n;i++)g+=`<div class="axl">${i}</div>`;
     return{q:"Apakah koordinat bintang ⭐ ini?",
-      vis:`<div class="grid2d" style="grid-template-columns:24px repeat(${n},34px)">${g}</div>
-        <div class="hint">Baca paksi-x (mendatar) dahulu, kemudian paksi-y (menegak).</div>`,
+      vis:papanKoordinat(n,{titik:[{x,y,isi:"⭐"}]})
+        +`<div class="hint">Baca paksi-x (mendatar) dahulu, kemudian paksi-y (menegak).</div>`,
       opts:shuffle([`(${x}, ${y})`,`(${y}, ${x})`,`(${x+1}, ${y})`,`(${x}, ${y+1})`]).filter((v,i,a)=>a.indexOf(v)===i).slice(0,4),
       ans:-1,ansVal:`(${x}, ${y})`,
       hint:`Bintang berada ${x} unit ke kanan dan ${y} unit ke atas → (${x}, ${y}).`};
   }
-  let g="";
-  for(let r=n;r>=1;r--){g+=`<div class="axl">${r}</div>`;
-    for(let ccx=1;ccx<=n;ccx++)g+=`<div class="gc" id="g${ccx}_${r}" onclick="KRDsel(${ccx},${r})"></div>`;}
-  g+='<div class="axl"></div>';for(let i=1;i<=n;i++)g+=`<div class="axl">${i}</div>`;
   return{mod:"interaktif",q:`Klik pada kedudukan <b>(${x}, ${y})</b>`,
-    vis:`<div class="grid2d" style="grid-template-columns:24px repeat(${n},34px)">${g}</div>`,
+    vis:papanKoordinat(n,{klik:true}),
     cek:()=>KRD&&KRD[0]===x&&KRD[1]===y,ansVal:`(${x}, ${y})`,
     hint:`Gerak ${x} unit pada paksi-x, kemudian ${y} unit pada paksi-y.`};
 };
 function KRDsel(x,y){
-  document.querySelectorAll(".gc.sel").forEach(e=>e.classList.remove("sel"));
-  const el=document.getElementById("g"+x+"_"+y);if(el)el.classList.add("sel");
+  document.querySelectorAll(".kp.sel").forEach(e=>e.classList.remove("sel"));
+  const el=document.getElementById("kp"+x+"_"+y);if(el)el.classList.add("sel");
   KRD=[x,y];
 }
 
